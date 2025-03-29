@@ -1,9 +1,11 @@
 export function add(string) {
   let delimeter = ",";
   if (!string?.trim()) return 0;
-  const result = string.split(/,|\n/).reduce((acc, number) => {
-    const currentNumber = Number.isNaN(number) ? 0 : Number(number);
-    return currentNumber + acc;
+  if (string.startsWith("//")) {
+    delimeter = string[2];
+    string = string.substring(3);
+  }
+  return string.split(new RegExp(`${delimeter}|\n`)).reduce((acc, number) => {
+    return (Number.isNaN(number) ? 0 : Number(number)) + acc;
   }, 0);
-  return result;
 }

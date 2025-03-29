@@ -18,3 +18,6 @@ test("it should work with new lines also", () => {
     5, 8`)
   ).toBe(14);
 });
+test("it should work with custom delimeter", () => {
+  expect(add("//;\n1;2")).toBe(3);
+});
