@@ -11,3 +11,10 @@ test("n digits should give correct sum", () => {
   expect(add("1,5")).toBe(6);
   expect(add("1,5, 8")).toBe(14);
 });
+test("it should work with new lines also", () => {
+  expect(add("1\n5")).toBe(6);
+  expect(
+    add(`1
+    5, 8`)
+  ).toBe(14);
+});
