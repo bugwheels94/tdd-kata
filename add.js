@@ -5,7 +5,17 @@ export function add(string) {
     delimeter = string[2];
     string = string.substring(3);
   }
-  return string.split(new RegExp(`${delimeter}|\n`)).reduce((acc, number) => {
-    return (Number.isNaN(number) ? 0 : Number(number)) + acc;
-  }, 0);
+  const result = string
+    .split(new RegExp(`${delimeter}|\n`))
+    .reduce((acc, number) => {
+      const currentNumber = Number.isNaN(number) ? 0 : Number(number);
+      if (currentNumber < 0) {
+        return Array.isArray(acc) ? [...acc, currentNumber] : [currentNumber];
+      }
+      if (Array.isArray(acc)) return acc;
+      return currentNumber + acc;
+    }, 0);
+  if (Array.isArray(result))
+    throw new Error(`negative numbers not allowed ${result.join(",")}`);
+  return result;
 }

@@ -21,3 +21,7 @@ test("it should work with new lines also", () => {
 test("it should work with custom delimeter", () => {
   expect(add("//;\n1;2")).toBe(3);
 });
+test("it should throw exception if negative number present", () => {
+  expect(() => add("-1,2")).toThrow(/negative numbers not allowed -1/);
+  expect(() => add("-1,2, -3")).toThrow(/negative numbers not allowed -1,-3/);
+});
